@@ -1,4 +1,4 @@
-import { Empty, Select, Spin } from 'antd/es';
+import { Empty, Select, Spin } from 'antd';
 import { DefaultOptionType, SelectProps } from 'antd/es/select';
 import React, { UIEvent, useEffect, useRef, useState } from 'react';
 

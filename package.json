@@ -1,6 +1,6 @@
 {
   "name": "javis-lib",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "description": "Template and quick-starter to create modern React libraries using Rollup.",
   "main": "dist/cjs/bundle.js",
   "module": "dist/esm/bundle.js",

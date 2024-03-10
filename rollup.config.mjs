@@ -6,6 +6,7 @@ import typescript from '@rollup/plugin-typescript';
 import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import babel from '@rollup/plugin-babel';
 
 import pkg from './package.json' assert { type: 'json' };
 
@@ -31,11 +32,15 @@ export default [
 			} */
     ],
     plugins: [
+      babel({
+        babelrc: false,
+        plugins: [['import', { libraryName: 'antd', style: true }]],
+      }),
       peerDepsExternal(),
       resolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
-      postcss({ extract: true }),
+      // postcss(),
       terser(),
     ],
   },

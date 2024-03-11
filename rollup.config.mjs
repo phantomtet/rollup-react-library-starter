@@ -32,10 +32,10 @@ export default [
 			} */
     ],
     plugins: [
-      babel({
-        babelrc: false,
-        plugins: [['import', { libraryName: 'antd', style: true }]],
-      }),
+      // babel({
+      //   babelrc: false,
+      //   plugins: [['import', { libraryName: 'antd', style: true }]],
+      // }),
       peerDepsExternal(),
       resolve(),
       commonjs(),

@@ -1,6 +1,6 @@
 {
   "name": "javis-lib",
-  "version": "0.1.13",
+  "version": "0.1.16",
   "description": "Template and quick-starter to create modern React libraries using Rollup.",
   "main": "dist/cjs/bundle.js",
   "module": "dist/esm/bundle.js",
@@ -27,9 +27,9 @@
     "template"
   ],
   "peerDependencies": {
-    "antd": "latest",
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "antd": "5.15.1"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
@@ -52,9 +52,9 @@
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.0",
     "@types/react": "^18.0.33",
+    "antd": "5.15.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
-    "antd": "^5.15.1",
     "babel-jest": "^29.5.0",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",

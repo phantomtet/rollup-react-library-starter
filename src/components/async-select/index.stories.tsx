@@ -1,18 +1,19 @@
 import { Meta, StoryFn } from '@storybook/react';
-import React, { useCallback, useState } from 'react';
-import { AsyncSelect, I_AsyncSelectProps, I_SearchParams } from '.';
+import { useCallback, useState } from 'react';
+import { AsyncSelect, I_SearchParams } from '.';
 import { Form } from 'antd';
+import React from 'react';
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'ReactComponentLibrary/AsyncSelect',
   component: AsyncSelect,
 } as Meta<typeof AsyncSelect>;
 
-const getOptions = async (args: I_SearchParams) =>
+const getOptions = async (args?: I_SearchParams) =>
   (
     await fetch(
       'https://65ebf7df43ce16418934648c.mockapi.io/users' +
-        `?search=${args.search}`,
+        `?search=${args?.search || ''}`,
     )
   )
     .json()
@@ -22,7 +23,7 @@ const Template: StoryFn<typeof AsyncSelect> = (args) => {
   const [state, setState] = useState(0);
   const [form] = Form.useForm();
   const userId = Form.useWatch('userId', form);
-  const getInitialValue = useCallback(
+  const getInitialOptions = useCallback(
     async () =>
       userId &&
       (
@@ -31,9 +32,10 @@ const Template: StoryFn<typeof AsyncSelect> = (args) => {
         )
       )
         .json()
-        .then((res) => ({ label: res.name, value: res.id })),
+        .then((res) => [{ label: res.name, value: res.id }]),
     [userId],
   );
+  console.log(userId);
   return (
     <Form form={form}>
       <button
@@ -42,10 +44,11 @@ const Template: StoryFn<typeof AsyncSelect> = (args) => {
       >
         {state}
       </button>
-      <Form.Item name="userId" initialValue="1">
+      <Form.Item name="userId" initialValue={['1', '2']}>
         <AsyncSelect
+          mode="multiple"
           getOptions={getOptions}
-          getInitialValue={getInitialValue}
+          getInitialOptions={getOptions}
         />
       </Form.Item>
     </Form>

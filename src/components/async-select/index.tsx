@@ -6,7 +6,7 @@ export interface I_AsyncSelectProps extends SelectProps {
   getOptions: (
     args: I_SearchParams,
   ) => Promise<DefaultOptionType[]> | DefaultOptionType[];
-  getInitialValue: () => Promise<DefaultOptionType>;
+  getInitialOptions: () => Promise<DefaultOptionType[]> | DefaultOptionType[];
   debounceTime?: number;
 }
 
@@ -24,7 +24,7 @@ const initialSearchParams: I_SearchParams = {
 export const AsyncSelect = ({
   getOptions,
   debounceTime = 400,
-  getInitialValue,
+  getInitialOptions,
   ...props
 }: I_AsyncSelectProps) => {
   const [options, setOptions] = useState<DefaultOptionType[]>([]);
@@ -70,16 +70,16 @@ export const AsyncSelect = ({
       true,
     );
   };
-  const fetchInitialData = async () => {
-    setLoading(true);
-    const data = await getInitialValue();
+  const fetchInitialOptions = async () => {
+    if (!options.length) setLoading(true);
+    const data = await getInitialOptions();
     setLoading(false);
     if (!data) return;
-    setOptions([data]);
+    setOptions(data);
   };
   useEffect(() => {
-    fetchInitialData();
-  }, [getInitialValue]);
+    fetchInitialOptions();
+  }, [getInitialOptions]);
 
   return (
     <Select
